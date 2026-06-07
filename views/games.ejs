@@ -1,0 +1,271 @@
+<%- include('partials/head') %>
+
+    <div class="app-root">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="app-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-gamepad2-icon lucide-gamepad-2">
+                        <line x1="6" x2="10" y1="11" y2="11" />
+                        <line x1="8" x2="8" y1="9" y2="13" />
+                        <line x1="15" x2="15.01" y1="12" y2="12" />
+                        <line x1="18" x2="18.01" y1="10" y2="10" />
+                        <path
+                            d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" />
+                    </svg>
+                </div>
+                <span class="sidebar-title">GamePanel</span>
+            </div>
+            <div class="sidebar-content">
+                <a class="sidebar-item" href="/dashboard">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-layout-grid-icon lucide-layout-grid sidebar-item-icon">
+                        <rect width="7" height="7" x="3" y="3" rx="1" />
+                        <rect width="7" height="7" x="14" y="3" rx="1" />
+                        <rect width="7" height="7" x="14" y="14" rx="1" />
+                        <rect width="7" height="7" x="3" y="14" rx="1" />
+                    </svg>
+                    <span class="sidebar-item-label">Pulpit</span>
+                </a>
+                <a class="sidebar-item active" href="/games">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-gamepad2-icon lucide-gamepad-2 sidebar-item-icon">
+                        <line x1="6" x2="10" y1="11" y2="11" />
+                        <line x1="8" x2="8" y1="9" y2="13" />
+                        <line x1="15" x2="15.01" y1="12" y2="12" />
+                        <line x1="18" x2="18.01" y1="10" y2="10" />
+                        <path
+                            d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" />
+                    </svg>
+                    <span class="sidebar-item-label">Gry</span>
+                </a>
+                <a class="sidebar-item" href="/achievements">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-trophy-icon lucide-trophy">
+                        <path d="M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978" />
+                        <path d="M14 14.66v1.626a2 2 0 0 0 .976 1.696A5 5 0 0 1 17 21.978" />
+                        <path d="M18 9h1.5a1 1 0 0 0 0-5H18" />
+                        <path d="M4 22h16" />
+                        <path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z" />
+                        <path d="M6 9H4.5a1 1 0 0 1 0-5H6" />
+                    </svg>
+                    <span class="sidebar-item-label">Osiągnięcia</span>
+                </a>
+            </div>
+        </aside>
+        <main class="main">
+            <header class="header">
+                <div class="header-content">
+                    <span class="header-title">Gry</span>
+                    <div class="header-steam-status" id="steamSyncBtn" role="button" tabindex="0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                            class="bi bi-steam" viewBox="0 0 16 16">
+                            <path
+                                d="M.329 10.333A8.01 8.01 0 0 0 7.99 16C12.414 16 16 12.418 16 8s-3.586-8-8.009-8A8.006 8.006 0 0 0 0 7.468l.003.006 4.304 1.769A2.2 2.2 0 0 1 5.62 8.88l1.96-2.844-.001-.04a3.046 3.046 0 0 1 3.042-3.043 3.046 3.046 0 0 1 3.042 3.043 3.047 3.047 0 0 1-3.111 3.044l-2.804 2a2.223 2.223 0 0 1-3.075 2.11 2.22 2.22 0 0 1-1.312-1.568L.33 10.333Z" />
+                            <path
+                                d="M4.868 12.683a1.715 1.715 0 0 0 1.318-3.165 1.7 1.7 0 0 0-1.263-.02l1.023.424a1.261 1.261 0 1 1-.97 2.33l-.99-.41a1.7 1.7 0 0 0 .882.84Zm3.726-6.687a2.03 2.03 0 0 0 2.027 2.029 2.03 2.03 0 0 0 2.027-2.029 2.03 2.03 0 0 0-2.027-2.027 2.03 2.03 0 0 0-2.027 2.027m2.03-1.527a1.524 1.524 0 1 1-.002 3.048 1.524 1.524 0 0 1 .002-3.048" />
+                        </svg>
+                        <span class="header-steam-status-text">
+                            <%= syncLabel %>
+                        </span>
+                        <span class="header-steam-status-indicator <%= syncStatus %>"></span>
+                    </div>
+                    <div class="header-user">
+                        <img class="header-user-avatar" src="<%= user.avatar_url %>" alt="Avatar użytkownika">
+                        <span class="header-user-name">
+                            <%= user.username %>
+                        </span>
+                        <div class="header-logout-btn" onclick="window.location.href='/auth/logout'">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-door-open-icon lucide-door-open">
+                                <path d="M11 20H2" />
+                                <path
+                                    d="M11 4.562v16.157a1 1 0 0 0 1.242.97L19 20V5.562a2 2 0 0 0-1.515-1.94l-4-1A2 2 0 0 0 11 4.561z" />
+                                <path d="M11 4H8a2 2 0 0 0-2 2v14" />
+                                <path d="M14 12h.01" />
+                                <path d="M22 20h-3" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <content class="main-content">
+                <% const statusLabel={ tracking: 'Śledzone' , completed: 'Ukończone' , dropped: 'Porzucone' ,
+                    not_played: 'Nierozpoczęte' }; const statusClass={ tracking: 'tracking' , completed: 'completed' ,
+                    dropped: 'abandoned' , not_played: 'not-started' }; %>
+                    <div class="content-header">
+                        <span class="content-title">Biblioteka gier</span>
+                        <span class="content-subtitle">
+                            <%= games.length %> gier zsynchronizowanych ze Steam · <%= totalHours %> h łącznie
+                        </span>
+                    </div>
+                    <div class="games-toolbar">
+                        <div class="games-filters">
+                            <div class="pill active" data-filter="all">
+                                Wszystkie
+                                <span class="pill-count">
+                                    <%= games.length %>
+                                </span>
+                            </div>
+                            <div class="pill" data-filter="tracking">
+                                <span class="pill-status tracking"></span>
+                                Śledzone
+                                <span class="pill-count">
+                                    <%= countByStatus.tracking %>
+                                </span>
+                            </div>
+                            <div class="pill" data-filter="completed">
+                                <span class="pill-status completed"></span>
+                                Ukończone
+                                <span class="pill-count">
+                                    <%= countByStatus.completed %>
+                                </span>
+                            </div>
+                            <div class="pill" data-filter="dropped">
+                                <span class="pill-status abandoned"></span>
+                                Porzucone
+                                <span class="pill-count">
+                                    <%= countByStatus.dropped %>
+                                </span>
+                            </div>
+                            <div class="pill" data-filter="not_played">
+                                <span class="pill-status not-started"></span>
+                                Nierozpoczęte
+                                <span class="pill-count">
+                                    <%= countByStatus.not_played %>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="toolbar-search">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-search-icon lucide-search">
+                                <path d="m21 21-4.34-4.34" />
+                                <circle cx="11" cy="11" r="8" />
+                            </svg>
+                            <input type="text" id="searchInput" placeholder="Szukaj w bibliotece..." />
+                        </div>
+                        <select class="toolbar-sort" id="sortSelect">
+                            <option value="name_asc">Nazwa A-Z</option>
+                            <option value="playtime_desc">Najwięcej godzin</option>
+                            <option value="playtime_asc">Najmniej godzin</option>
+                            <option value="name_desc">Nazwa Z-A</option>
+                        </select>
+                    </div>
+                    <div class="games-grid" id="gamesGrid">
+                        <% games.forEach(function(game) { const ach=achievementCounts[game.id] || null; const
+                            achPercent=ach && ach.total> 0 ? Math.round((ach.unlocked / ach.total) * 100) : 0;
+                            const hours = Math.round((game.playtime_forever || 0) / 60);
+                            %>
+                            <div class="game-card" data-status="<%= game.status %>"
+                                data-title="<%= game.title.toLowerCase() %>"
+                                data-playtime="<%= game.playtime_forever || 0 %>" data-id="<%= game.id %>"
+                                style="cursor: pointer;" onclick="window.location.href='/games/<%= game.id %>'">
+                                <img class="game-card-image" src="<%= game.header_img_url %>" alt="<%= game.title %>">
+                                <div class="game-card-content"> <span class="game-card-title">
+                                        <%= game.title %>
+                                    </span>
+                                    <div class="game-card-meta">
+                                        <span class="game-card-status <%= statusClass[game.status] || '' %>">
+                                            <span class="pill-status <%= statusClass[game.status] || '' %>"></span>
+                                            <%= statusLabel[game.status] || game.status %>
+                                        </span>
+                                        <span class="sep"></span>
+                                        <span class="game-card-hours">
+                                            <%= hours %> h
+                                        </span>
+                                    </div>
+                                    <% if (ach && ach.total> 0) { %>
+                                        <div class="game-card-progress">
+                                            <div class="progress-text">
+                                                <span class="progress-achievements">
+                                                    <%= ach.unlocked %> / <%= ach.total %> osiągnięć
+                                                </span>
+                                                <span class="progress-percentage">
+                                                    <%= achPercent %>%
+                                                </span>
+                                            </div>
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" data-width="<%= achPercent %>"></div>
+                                            </div>
+                                        </div>
+                                        <% } else if (game.has_achievements) { %>
+                                            <div class="game-card-progress">
+                                                <div class="progress-text">
+                                                    <span class="progress-achievements">Osiągnięcia
+                                                        niezaładowane</span>
+                                                </div>
+                                                <div class="progress-bar">
+                                                    <div class="progress-fill" data-width="0"></div>
+                                                </div>
+                                            </div>
+                                            <% } %>
+                                </div>
+                            </div>
+                            <% }) %>
+                                <% if (games.length===0) { %>
+                                    <div class="games-empty">
+                                        <span>Brak gier. Kliknij status Steam, aby zsynchronizować bibliotekę.</span>
+                                    </div>
+                                    <% } %>
+                    </div>
+
+                    <script>
+                        const grid = document.getElementById('gamesGrid');
+                        const cards = Array.from(grid.querySelectorAll('.game-card'));
+                        const searchInput = document.getElementById('searchInput');
+                        const sortSelect = document.getElementById('sortSelect');
+                        const filterPills = document.querySelectorAll('.pill[data-filter]');
+                        let activeFilter = 'all';
+
+                        function applyFilters() {
+                            const query = searchInput.value.toLowerCase().trim();
+                            const sort = sortSelect.value;
+
+                            let visible = cards.filter(card => {
+                                const matchesFilter = activeFilter === 'all' || card.dataset.status === activeFilter;
+                                const matchesSearch = !query || card.dataset.title.includes(query);
+                                return matchesFilter && matchesSearch;
+                            });
+
+                            visible.sort((a, b) => {
+                                if (sort === 'playtime_desc') return Number(b.dataset.playtime) - Number(a.dataset.playtime);
+                                if (sort === 'playtime_asc') return Number(a.dataset.playtime) - Number(b.dataset.playtime);
+                                if (sort === 'name_asc') return a.dataset.title.localeCompare(b.dataset.title);
+                                if (sort === 'name_desc') return b.dataset.title.localeCompare(a.dataset.title);
+                                return 0;
+                            });
+
+                            cards.forEach(c => c.style.display = 'none');
+                            visible.forEach(c => { c.style.display = ''; grid.appendChild(c); });
+                        }
+
+                        filterPills.forEach(pill => {
+                            pill.addEventListener('click', () => {
+                                filterPills.forEach(p => p.classList.remove('active'));
+                                pill.classList.add('active');
+                                activeFilter = pill.dataset.filter;
+                                applyFilters();
+                            });
+                        });
+
+                        searchInput.addEventListener('input', applyFilters);
+                        sortSelect.addEventListener('change', applyFilters);
+
+                        // Ustaw szerokości pasków postępu z data-width
+                        document.querySelectorAll('.progress-fill[data-width]').forEach(el => {
+                            el.style.width = el.dataset.width + '%';
+                        });
+                    </script>
+            </content>
+        </main>
+    </div>
+
+    <%- include('partials/modal-sync') %>
+
+        <%- include('partials/foot') %>

@@ -1,0 +1,337 @@
+<%- include('partials/head') %>
+
+    <div class="app-root">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="app-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-gamepad2-icon lucide-gamepad-2">
+                        <line x1="6" x2="10" y1="11" y2="11" />
+                        <line x1="8" x2="8" y1="9" y2="13" />
+                        <line x1="15" x2="15.01" y1="12" y2="12" />
+                        <line x1="18" x2="18.01" y1="10" y2="10" />
+                        <path
+                            d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" />
+                    </svg>
+                </div>
+                <span class="sidebar-title">GamePanel</span>
+            </div>
+            <div class="sidebar-content">
+                <a class="sidebar-item" href="/dashboard">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-layout-grid-icon lucide-layout-grid sidebar-item-icon">
+                        <rect width="7" height="7" x="3" y="3" rx="1" />
+                        <rect width="7" height="7" x="14" y="3" rx="1" />
+                        <rect width="7" height="7" x="14" y="14" rx="1" />
+                        <rect width="7" height="7" x="3" y="14" rx="1" />
+                    </svg>
+                    <span class="sidebar-item-label">Pulpit</span>
+                </a>
+                <a class="sidebar-item" href="/games">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-gamepad2-icon lucide-gamepad-2 sidebar-item-icon">
+                        <line x1="6" x2="10" y1="11" y2="11" />
+                        <line x1="8" x2="8" y1="9" y2="13" />
+                        <line x1="15" x2="15.01" y1="12" y2="12" />
+                        <line x1="18" x2="18.01" y1="10" y2="10" />
+                        <path
+                            d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" />
+                    </svg>
+                    <span class="sidebar-item-label">Gry</span>
+                </a>
+                <a class="sidebar-item active" href="/achievements">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-trophy-icon lucide-trophy sidebar-item-icon">
+                        <path d="M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978" />
+                        <path d="M14 14.66v1.626a2 2 0 0 0 .976 1.696A5 5 0 0 1 17 21.978" />
+                        <path d="M18 9h1.5a1 1 0 0 0 0-5H18" />
+                        <path d="M4 22h16" />
+                        <path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z" />
+                        <path d="M6 9H4.5a1 1 0 0 1 0-5H6" />
+                    </svg>
+                    <span class="sidebar-item-label">Osiągnięcia</span>
+                </a>
+            </div>
+        </aside>
+        <main class="main">
+            <header class="header">
+                <div class="header-content">
+                    <span class="header-title">Osiągnięcia</span>
+                    <div class="header-steam-status" id="steamSyncBtn" role="button" tabindex="0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                            class="bi bi-steam" viewBox="0 0 16 16">
+                            <path
+                                d="M.329 10.333A8.01 8.01 0 0 0 7.99 16C12.414 16 16 12.418 16 8s-3.586-8-8.009-8A8.006 8.006 0 0 0 0 7.468l.003.006 4.304 1.769A2.2 2.2 0 0 1 5.62 8.88l1.96-2.844-.001-.04a3.046 3.046 0 0 1 3.042-3.043 3.046 3.046 0 0 1 3.042 3.043 3.047 3.047 0 0 1-3.111 3.044l-2.804 2a2.223 2.223 0 0 1-3.075 2.11 2.22 2.22 0 0 1-1.312-1.568L.33 10.333Z" />
+                            <path
+                                d="M4.868 12.683a1.715 1.715 0 0 0 1.318-3.165 1.7 1.7 0 0 0-1.263-.02l1.023.424a1.261 1.261 0 1 1-.97 2.33l-.99-.41a1.7 1.7 0 0 0 .882.84Zm3.726-6.687a2.03 2.03 0 0 0 2.027 2.029 2.03 2.03 0 0 0 2.027-2.029 2.03 2.03 0 0 0-2.027-2.027 2.03 2.03 0 0 0-2.027 2.027m2.03-1.527a1.524 1.524 0 1 1-.002 3.048 1.524 1.524 0 0 1 .002-3.048" />
+                        </svg>
+                        <span class="header-steam-status-text">
+                            <%= syncLabel %>
+                        </span>
+                        <span class="header-steam-status-indicator <%= syncStatus %>"></span>
+                    </div>
+                    <div class="header-user">
+                        <img class="header-user-avatar" src="<%= user.avatar_url %>" alt="Avatar użytkownika">
+                        <span class="header-user-name">
+                            <%= user.username %>
+                        </span>
+                        <div class="header-logout-btn" onclick="window.location.href='/auth/logout'">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-door-open-icon lucide-door-open">
+                                <path d="M11 20H2" />
+                                <path
+                                    d="M11 4.562v16.157a1 1 0 0 0 1.242.97L19 20V5.562a2 2 0 0 0-1.515-1.94l-4-1A2 2 0 0 0 11 4.561z" />
+                                <path d="M11 4H8a2 2 0 0 0-2 2v14" />
+                                <path d="M14 12h.01" />
+                                <path d="M22 20h-3" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <content class="main-content">
+                <div class="content-header">
+                    <span class="content-title">Osiągnięcia</span>
+                    <span class="content-subtitle">
+                        <%= allunlocked %> z <%= alltotal %> odblokowanych (<%= percent %>%) we wszystkich grach
+                    </span>
+                </div>
+                <div class="stats-cards-grid">
+                    <div class="stat-card-ach">
+                        <div class="stat-card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-trophy-icon lucide-trophy">
+                                <path d="M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978" />
+                                <path d="M14 14.66v1.626a2 2 0 0 0 .976 1.696A5 5 0 0 1 17 21.978" />
+                                <path d="M18 9h1.5a1 1 0 0 0 0-5H18" />
+                                <path d="M4 22h16" />
+                                <path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z" />
+                                <path d="M6 9H4.5a1 1 0 0 1 0-5H6" />
+                            </svg>
+                        </div>
+                        <div class="stat-card-info">
+                            <span class="stat-card-label">Łącznie</span>
+                            <span class="stat-card-value">
+                                <%= alltotal %>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="stat-card-ach">
+                        <div class="stat-card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-check-icon lucide-check">
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                        </div>
+                        <div class="stat-card-info">
+                            <span class="stat-card-label">Odblokowane</span>
+                            <span class="stat-card-value">
+                                <%= allunlocked %>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="stat-card-ach">
+                        <div class="stat-card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-clock-icon lucide-clock">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 6v6l4 2" />
+                            </svg>
+                        </div>
+                        <div class="stat-card-info">
+                            <span class="stat-card-label">Pozostało</span>
+                            <span class="stat-card-value">
+                                <%= alltotal - allunlocked %>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="stat-card-ach">
+                        <div class="stat-card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-gem-icon lucide-gem">
+                                <path d="M10.5 3 8 9l4 13 4-13-2.5-6" />
+                                <path
+                                    d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3z" />
+                                <path d="M2 9h20" />
+                            </svg>
+                        </div>
+                        <div class="stat-card-info">
+                            <span class="stat-card-label">Legendarne ( &lt; 1% )</span>
+                            <span class="stat-card-value">
+                                <%= legendaryCount %>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="games-toolbar">
+                    <div class="games-filters">
+                        <div class="pill active" data-filter="all">
+                            Wszystkie
+                        </div>
+                        <div class="pill" data-filter="unlocked">
+                            Odblokowane
+                        </div>
+                        <div class="pill" data-filter="locked">
+                            Brakujące
+                        </div>
+                    </div>
+                    <select class="toolbar-sort" id="rarityFilter" style="margin-left: auto;">
+                        <option value="rarity_all">Rzadkość: wszystkie</option>
+                        <option value="rarity_legendary">Legendarne</option>
+                        <option value="rarity_epic">Epickie</option>
+                        <option value="rarity_ultra_rare">Bardzo rzadkie</option>
+                        <option value="rarity_rare">Rzadkie</option>
+                        <option value="rarity_common">Pospolite</option>
+                    </select>
+                    <select class="toolbar-sort" id="gameFilter">
+                        <option value="all_games">Wszystkie gry</option>
+                        <% games.filter(g => achievementCounts[g.id]).forEach(function(g) { %>
+                            <option value="<%= g.id %>"><%= g.title %></option>
+                        <% }); %>
+                    </select>
+                </div>
+
+                <div class="achievements-grid" id="achGrid">
+                    <% achievements.forEach(function(ach) {
+                        const pct = ach.global_percent != null ? ach.global_percent : null;
+                        let rarityLabel = null;
+                        let rarityClass = null;
+                        let rarityKey = 'none';
+                        if (pct !== null) {
+                            if (pct > 60)      { rarityLabel = 'Pospolite';      rarityClass = 'rarity-common';    rarityKey = 'rarity_common'; }
+                            else if (pct > 20) { rarityLabel = 'Rzadkie';        rarityClass = 'rarity-rare';      rarityKey = 'rarity_rare'; }
+                            else if (pct > 5)  { rarityLabel = 'Bardzo rzadkie'; rarityClass = 'rarity-very-rare'; rarityKey = 'rarity_ultra_rare'; }
+                            else if (pct > 1)  { rarityLabel = 'Epickie';        rarityClass = 'rarity-epic';      rarityKey = 'rarity_epic'; }
+                            else               { rarityLabel = 'Legendarne';     rarityClass = 'rarity-legendary'; rarityKey = 'rarity_legendary'; }
+                        }
+                    %>
+                    <div class="ach-card"
+                         data-unlocked="<%= ach.is_unlocked ? '1' : '0' %>"
+                         data-rarity="<%= pct !== null ? pct : 9999 %>"
+                         data-rarity-key="<%= rarityKey %>"
+                         data-game-id="<%= ach.game_id %>">
+                        <span class="ach-card-dot <%= ach.is_unlocked ? 'dot-unlocked' : 'dot-locked' %>"></span>
+                        <img class="ach-card-icon"
+                             src="<%= ach.is_unlocked ? (ach.icon_url || '') : (ach.icon_url_gray || ach.icon_url || '') %>"
+                             alt="<%= ach.display_name || ach.api_name %>">
+                        <div class="ach-card-body">
+                            <span class="ach-card-title"><%= ach.display_name || ach.api_name %></span>
+                            <span class="ach-card-desc"><%= ach.description || '' %></span>
+                        </div>
+                        <div class="ach-card-footer">
+                            <% if (rarityLabel) { %>
+                                <span class="ach-rarity <%= rarityClass %>">
+                                    <%= rarityLabel %>
+                                    <% if (pct !== null) { %><span class="ach-rarity-pct"><%= pct.toFixed(1) %>%</span><% } %>
+                                </span>
+                            <% } %>
+                            <span class="ach-card-game"><%= ach.game_title %></span>
+                        </div>
+                    </div>
+                    <% }); %>
+                </div>
+
+                <div class="pagination" id="pagination"></div>
+
+                <script>
+                    const PAGE_SIZE = 54;
+                    let currentPage = 1;
+                    let activeFilter = 'all';
+                    let activeRarity = 'rarity_all';
+                    let activeGame = 'all_games';
+
+                    const allCards = Array.from(document.querySelectorAll('.ach-card'));
+                    const grid = document.getElementById('achGrid');
+                    const paginationEl = document.getElementById('pagination');
+                    const filterPills = document.querySelectorAll('.pill[data-filter]');
+                    const raritySelect = document.querySelector('.toolbar-sort[id="rarityFilter"]') || document.querySelectorAll('.toolbar-sort')[0];
+                    const gameSelect = document.getElementById('gameFilter');
+
+                    function getFiltered() {
+                        return allCards.filter(card => {
+                            if (activeFilter === 'unlocked' && card.dataset.unlocked !== '1') return false;
+                            if (activeFilter === 'locked'   && card.dataset.unlocked !== '0') return false;
+                            if (activeGame !== 'all_games'  && card.dataset.gameId !== activeGame) return false;
+                            if (activeRarity !== 'rarity_all' && card.dataset.rarityKey !== activeRarity) return false;
+                            return true;
+                        });
+                    }
+
+                    function renderPage() {
+                        const filtered = getFiltered();
+                        const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+                        if (currentPage > totalPages) currentPage = totalPages;
+
+                        const start = (currentPage - 1) * PAGE_SIZE;
+                        const pageCards = filtered.slice(start, start + PAGE_SIZE);
+
+                        allCards.forEach(c => c.style.display = 'none');
+                        pageCards.forEach(c => c.style.display = '');
+
+                        // Pagination buttons
+                        paginationEl.innerHTML = '';
+                        if (totalPages <= 1) return;
+
+                        const createBtn = (label, page, disabled, active) => {
+                            const btn = document.createElement('button');
+                            btn.className = 'page-btn' + (active ? ' active' : '');
+                            btn.textContent = label;
+                            btn.disabled = disabled;
+                            btn.addEventListener('click', () => { currentPage = page; renderPage(); window.scrollTo(0,0); });
+                            return btn;
+                        };
+
+                        paginationEl.appendChild(createBtn('«', 1, currentPage === 1, false));
+                        paginationEl.appendChild(createBtn('‹', currentPage - 1, currentPage === 1, false));
+
+                        let startP = Math.max(1, currentPage - 2);
+                        let endP   = Math.min(totalPages, startP + 4);
+                        if (endP - startP < 4) startP = Math.max(1, endP - 4);
+
+                        for (let p = startP; p <= endP; p++) {
+                            paginationEl.appendChild(createBtn(p, p, false, p === currentPage));
+                        }
+
+                        paginationEl.appendChild(createBtn('›', currentPage + 1, currentPage === totalPages, false));
+                        paginationEl.appendChild(createBtn('»', totalPages, currentPage === totalPages, false));
+                    }
+
+                    filterPills.forEach(pill => {
+                        pill.addEventListener('click', () => {
+                            filterPills.forEach(p => p.classList.remove('active'));
+                            pill.classList.add('active');
+                            activeFilter = pill.dataset.filter;
+                            currentPage = 1;
+                            renderPage();
+                        });
+                    });
+
+                    raritySelect.addEventListener('change', () => {
+                        activeRarity = raritySelect.value;
+                        currentPage = 1;
+                        renderPage();
+                    });
+
+                    gameSelect.addEventListener('change', () => {
+                        activeGame = gameSelect.value;
+                        currentPage = 1;
+                        renderPage();
+                    });
+
+                    renderPage();
+                </script>
+            </content>
+        </main>
+    </div>
+
+    <%- include('partials/modal-sync') %>
+        <%- include('partials/foot') %>

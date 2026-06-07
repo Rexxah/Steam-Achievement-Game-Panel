@@ -1,0 +1,53 @@
+<%- include('../partials/head') %>
+
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <h1 class="auth-title">Rejestracja</h1>
+
+            <% if (errors.length> 0) { %>
+                <ul class="error-list">
+                    <% errors.forEach(function(err) { %>
+                        <li>
+                            <%= err %>
+                        </li>
+                        <% }); %>
+                </ul>
+                <% } %>
+
+                    <form action="/auth/register" method="POST" class="auth-form">
+                        <div class="form-group">
+                            <label for="email">Adres e-mail</label>
+                            <input type="email" id="email" name="email" value="<%= formData.email || '' %>"
+                                placeholder="twoj@email.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Hasło</label>
+                            <input type="password" id="password" name="password" placeholder="Minimum 6 znaków"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password_confirm">Powtórz hasło</label>
+                            <input type="password" id="password_confirm" name="password_confirm"
+                                placeholder="Powtórz hasło" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="steam_profile_url">
+                                URL profilu Steam <span class="optional">(opcjonalne)</span>
+                            </label>
+                            <input type="url" id="steam_profile_url" name="steam_profile_url"
+                                value="<%= formData.steam_profile_url || '' %>"
+                                placeholder="https://steamcommunity.com/profiles/76561198927006340/"
+                                pattern="https://steamcommunity\.com/profiles/\d{17}/?">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Zarejestruj się</button>
+                    </form>
+
+                    <p class="auth-switch">Masz już konto? <a href="/auth/login">Zaloguj się</a></p>
+        </div>
+    </div>
+
+    <%- include('../partials/foot') %>

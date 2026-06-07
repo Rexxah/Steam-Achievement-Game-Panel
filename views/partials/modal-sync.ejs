@@ -1,0 +1,201 @@
+<div class="modal-overlay" id="syncModal">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="modal-title">Synchronizacja Steam</span>
+        </div>
+        <div class="modal-body">
+            <div class="modal-status" id="syncStatus">
+                <div class="sync-spinner" id="syncSpinner"></div>
+                <span id="syncStatusText">Łączenie ze Steam...</span>
+            </div>
+            <div class="sync-progress" id="syncProgress" style="display: none;">
+                <div class="sync-progress-info">
+                    <span id="syncProgressGame" class="sync-progress-game">—</span>
+                    <span id="syncProgressStep" class="sync-progress-step"></span>
+                </div>
+                <div class="sync-progress-bar">
+                    <div class="sync-progress-fill" id="syncProgressFill"></div>
+                </div>
+                <span class="sync-progress-count">
+                    <span id="syncProgressCurrent">0</span> / <span id="syncProgressTotal">0</span> gier
+                </span>
+            </div>
+            <div class="sync-result" id="syncResult" style="display: none;">
+                <div class="sync-result-row">
+                    <span class="sync-result-label">Nowe gry:</span>
+                    <span class="sync-result-value" id="syncAdded">—</span>
+                </div>
+                <div class="sync-result-row">
+                    <span class="sync-result-label">Zaktualizowane:</span>
+                    <span class="sync-result-value" id="syncUpdated">—</span>
+                </div>
+                <div class="sync-result-row">
+                    <span class="sync-result-label">Łącznie gier:</span>
+                    <span class="sync-result-value" id="syncTotal">—</span>
+                </div>
+            </div>
+            <div class="sync-error" id="syncError" style="display: none;">
+                <span id="syncErrorText"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const steamSyncBtn = document.getElementById('steamSyncBtn');
+    const syncModal = document.getElementById('syncModal');
+    let activeES = null;
+
+    steamSyncBtn.addEventListener('click', openSyncModal);
+    steamSyncBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') openSyncModal();
+    });
+
+    syncModal.addEventListener('click', (e) => {
+        if (e.target === syncModal) closeSyncModal();
+    });
+
+    function openSyncModal() {
+        document.getElementById('syncStatusText').textContent = 'Łączenie ze Steam...';
+        document.getElementById('syncResult').style.display = 'none';
+        document.getElementById('syncError').style.display = 'none';
+        document.getElementById('syncProgress').style.display = 'none';
+        document.getElementById('syncSpinner').style.display = 'block';
+        syncModal.classList.add('open');
+
+        const stepLabels = { 1: 'Pobieranie schematu', 2: 'Odblokowania', 3: 'Statystyki globalne' };
+
+        activeES = new EventSource('/games/sync');
+
+        activeES.addEventListener('status', (e) => {
+            const data = JSON.parse(e.data);
+            document.getElementById('syncStatusText').textContent = data.message;
+        });
+
+        activeES.addEventListener('games_done', (e) => {
+            const data = JSON.parse(e.data);
+            document.getElementById('syncStatusText').textContent =
+                `Gry pobrane: +${data.added} nowych, ${data.updated} zaktualizowanych`;
+        });
+
+        activeES.addEventListener('ach_start', (e) => {
+            const data = JSON.parse(e.data);
+            document.getElementById('syncProgress').style.display = 'flex';
+            document.getElementById('syncProgressTotal').textContent = data.total;
+            document.getElementById('syncProgressCurrent').textContent = '0';
+            document.getElementById('syncProgressFill').style.width = '0%';
+            document.getElementById('syncStatusText').textContent = 'Synchronizacja osiągnięć...';
+        });
+
+        activeES.addEventListener('ach_progress', (e) => {
+            const data = JSON.parse(e.data);
+            const pct = Math.round((data.current / data.total) * 100);
+            document.getElementById('syncProgressCurrent').textContent = data.current;
+            document.getElementById('syncProgressTotal').textContent = data.total;
+            document.getElementById('syncProgressFill').style.width = pct + '%';
+            document.getElementById('syncProgressGame').textContent = data.game;
+            document.getElementById('syncProgressStep').textContent = stepLabels[data.step] || '';
+        });
+
+        activeES.addEventListener('ach_error', (e) => {
+            const data = JSON.parse(e.data);
+            console.warn(`Pominięto grę ${data.game}: ${data.message}`);
+        });
+
+        activeES.addEventListener('done', (e) => {
+            activeES.close();
+            activeES = null;
+            const data = JSON.parse(e.data);
+            document.getElementById('syncSpinner').style.display = 'none';
+            document.getElementById('syncProgressFill').style.width = '100%';
+            document.getElementById('syncStatusText').textContent = 'Synchronizacja zakończona!';
+            document.getElementById('syncAdded').textContent = data.added;
+            document.getElementById('syncUpdated').textContent = data.updated;
+            document.getElementById('syncTotal').textContent = data.total;
+            document.getElementById('syncResult').style.display = 'flex';
+
+            setTimeout(() => {
+                closeSyncModal();
+                window.location.reload();
+            }, 2500);
+        });
+
+        activeES.addEventListener('error', (e) => {
+            if (activeES) { activeES.close(); activeES = null; }
+            let msg = 'Błąd połączenia z serwerem.';
+            try { msg = JSON.parse(e.data).message || msg; } catch (_) { }
+            showSyncError(msg);
+        });
+    }
+
+    function showSyncError(msg) {
+        document.getElementById('syncSpinner').style.display = 'none';
+        document.getElementById('syncStatusText').textContent = 'Synchronizacja nie powiodła się.';
+        document.getElementById('syncErrorText').textContent = msg;
+        document.getElementById('syncError').style.display = 'flex';
+    }
+
+    function closeSyncModal() {
+        if (activeES) { activeES.close(); activeES = null; }
+        syncModal.classList.remove('open');
+    }
+</script>
+
+
+<script>
+    const steamSyncBtn = document.getElementById('steamSyncBtn');
+    const syncModal = document.getElementById('syncModal');
+
+    steamSyncBtn.addEventListener('click', openSyncModal);
+    steamSyncBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') openSyncModal();
+    });
+
+    syncModal.addEventListener('click', (e) => {
+        if (e.target === syncModal) closeSyncModal();
+    });
+
+    function openSyncModal() {
+        // Reset stanu
+        document.getElementById('syncStatusText').textContent = 'Trwa synchronizacja gier...';
+        document.getElementById('syncResult').style.display = 'none';
+        document.getElementById('syncError').style.display = 'none';
+        document.querySelector('.sync-spinner').style.display = 'block';
+        syncModal.classList.add('open');
+
+        fetch('/games/sync', { method: 'POST' })
+            .then(res => res.json())
+            .then(data => {
+                document.querySelector('.sync-spinner').style.display = 'none';
+
+                if (data.success) {
+                    document.getElementById('syncStatusText').textContent = 'Synchronizacja zakończona!';
+                    document.getElementById('syncAdded').textContent = data.added;
+                    document.getElementById('syncUpdated').textContent = data.updated;
+                    document.getElementById('syncTotal').textContent = data.total;
+                    document.getElementById('syncResult').style.display = 'flex';
+
+                    setTimeout(() => {
+                        closeSyncModal();
+                        window.location.reload();
+                    }, 2000);
+                } else {
+                    showError(data.error || 'Nieznany błąd.');
+                }
+            })
+            .catch(() => {
+                showError('Błąd połączenia z serwerem.');
+            });
+    }
+
+    function showError(msg) {
+        document.querySelector('.sync-spinner').style.display = 'none';
+        document.getElementById('syncStatusText').textContent = 'Synchronizacja nie powiodła się.';
+        document.getElementById('syncErrorText').textContent = msg;
+        document.getElementById('syncError').style.display = 'flex';
+    }
+
+    function closeSyncModal() {
+        syncModal.classList.remove('open');
+    }
+</script>
